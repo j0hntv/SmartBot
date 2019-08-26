@@ -1,5 +1,6 @@
 import dialogflow_v2 as dialogflow
 
+
 def get_answer(project_id, session_id, text, language_code):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
@@ -27,6 +28,9 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
         training_phrase = dialogflow.types.Intent.TrainingPhrase(parts=[part])
         training_phrases.append(training_phrase)
 
+    if isinstance(message_texts, str):
+        message_texts = [message_texts]
+
     text = dialogflow.types.Intent.Message.Text(text=message_texts)
     message = dialogflow.types.Intent.Message(text=text)
 
@@ -36,3 +40,5 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
         messages=[message])
 
     response = intents_client.create_intent(parent, intent)
+    
+    return response
