@@ -18,9 +18,11 @@ def main():
 
     for intent_name, training_phrases in train_data.items():
         print(f'[*] {intent_name}...', end=' ')
+
         train_questions = training_phrases['questions']
         train_answer = training_phrases['answer']
         dialogflow_api.create_intent(GOOGLE_PROJECT_ID, intent_name, train_questions, train_answer)
+        
         print('Ok.')
 
     print('[*] Бот готов к бою!')
