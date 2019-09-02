@@ -1,6 +1,5 @@
 import json
 import os
-from dotenv import load_dotenv
 import dialogflow_api
 import sys
 
