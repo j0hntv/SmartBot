@@ -1,7 +1,6 @@
 import logging
 import os
 import telegram
-from dotenv import load_dotenv
 
 
 class Handler(logging.Handler):
@@ -17,7 +16,6 @@ class Handler(logging.Handler):
 
 
 def create_logger(name):
-    load_dotenv()
 
     telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id_to_send_logs = os.getenv('CHAT_ID_TO_SEND_LOGS')
