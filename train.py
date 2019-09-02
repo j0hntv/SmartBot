@@ -6,7 +6,6 @@ import sys
 
 
 def main():
-    load_dotenv()
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
     file_with_training_phrases = sys.argv[1]
@@ -29,6 +28,7 @@ def main():
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
+        load_dotenv()
         main()
     else:
         print('[*] Не указан путь к файлу с тренировочными фразами.')
