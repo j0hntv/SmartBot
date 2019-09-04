@@ -19,6 +19,7 @@ def get_answer(project_id, session_id, text, language_code):
 
     return response.query_result.fulfillment_text
 
+
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
     intents_client = dialogflow.IntentsClient()
     parent = intents_client.project_agent_path(project_id)
@@ -42,3 +43,9 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
     response = intents_client.create_intent(parent, intent)
     
     return response
+
+
+def delete_intent(project_id, intent_id):
+    intents_client = dialogflow.IntentsClient()
+    intent_path = intents_client.intent_path(project_id, intent_id)
+    intents_client.delete_intent(intent_path)
