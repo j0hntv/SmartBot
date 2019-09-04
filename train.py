@@ -2,6 +2,7 @@ import json
 import os
 import dialogflow_api
 import sys
+from dotenv import load_dotenv
 
 
 def main():
@@ -16,14 +17,17 @@ def main():
 
         print('[*] Обучение бота...')
 
-        for intent_name, training_phrases in train_data.items():
-            print(f'[*] {intent_name}...', end=' ')
+        intents = dialogflow_api.get_intents(GOOGLE_PROJECT_ID)
 
-            train_questions = training_phrases['questions']
-            train_answer = training_phrases['answer']
-            dialogflow_api.create_intent(GOOGLE_PROJECT_ID, intent_name, train_questions, train_answer)
-            
-            print('Ok.')
+        for intent_name, training_phrases in train_data.items():
+            if intent_name not in intents:
+                print(f'[*] {intent_name}...', end=' ')
+
+                train_questions = training_phrases['questions']
+                train_answer = training_phrases['answer']
+                dialogflow_api.create_intent(GOOGLE_PROJECT_ID, intent_name, train_questions, train_answer)
+                
+                print('Ok.')
 
         print('[*] Бот готов к бою!')
 
