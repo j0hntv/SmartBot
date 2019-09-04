@@ -49,3 +49,11 @@ def delete_intent(project_id, intent_id):
     intents_client = dialogflow.IntentsClient()
     intent_path = intents_client.intent_path(project_id, intent_id)
     intents_client.delete_intent(intent_path)
+
+
+def get_intents(project_id):
+    intents_client = dialogflow.IntentsClient()
+    parent = intents_client.project_agent_path(project_id)
+    intents = intents_client.list_intents(parent)
+
+    return {intent.display_name: intent.name.split('/')[-1] for intent in intents}
