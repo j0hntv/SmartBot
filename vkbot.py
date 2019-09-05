@@ -6,6 +6,9 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import random
 import log
 
+load_dotenv()
+logger = log.create_logger('VK-bot')
+
 
 def reply(event, vk_api):
     answer = dialogflow_api.get_answer(GOOGLE_PROJECT_ID, event.user_id, event.text, 'ru')
@@ -20,12 +23,9 @@ def reply(event, vk_api):
 
 if __name__ == "__main__":
 
-    load_dotenv()
-
     VK_TOKEN = os.getenv('VK_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
-    logger = log.create_logger('VK-bot')
     logger.info('Бот заработал.')
 
     vk_session = vk_api.VkApi(token=VK_TOKEN)
