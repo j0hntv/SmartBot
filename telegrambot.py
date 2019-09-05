@@ -4,6 +4,9 @@ import os
 import dialogflow_api
 import log
 
+load_dotenv()
+logger = log.create_logger('Telegram-bot')
+
 
 def start(bot, update):
     logger.info(f'Start of dialog {update.message.chat_id}')
@@ -27,12 +30,9 @@ def reply(bot, update):
     
 if __name__ == "__main__":
 
-    load_dotenv()
-
     TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
-    logger = log.create_logger('Telegram-bot')
     logger.info('Бот заработал.')
 
     updater = Updater(TELEGRAM_BOT_TOKEN)
