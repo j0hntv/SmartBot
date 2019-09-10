@@ -15,7 +15,7 @@ class Handler(logging.Handler):
         self.bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
-def create_logger(name):
+def get_logger(name):
 
     telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id_to_send_logs = os.getenv('CHAT_ID_TO_SEND_LOGS')
