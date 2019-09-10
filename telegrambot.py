@@ -5,7 +5,7 @@ import dialogflow_api
 import log
 
 load_dotenv()
-logger = log.create_logger('Telegram-bot')
+logger = log.get_logger('Telegram-bot')
 
 
 def start(bot, update):
