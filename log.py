@@ -22,7 +22,7 @@ def create_logger(name):
 
     bot = telegram.Bot(token=telegram_bot_token)
 
-    logger = logging.getLogger()
+    logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
     handler = Handler(bot, chat_id_to_send_logs)
     formatter = logging.Formatter(f'[{name}] - %(levelname)s - %(message)s')
