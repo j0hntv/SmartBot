@@ -7,7 +7,7 @@ import random
 import log
 
 load_dotenv()
-logger = log.create_logger('VK-bot')
+logger = log.get_logger('VK-bot')
 
 
 def reply(event, vk_api):
