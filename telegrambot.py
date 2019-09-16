@@ -4,7 +4,6 @@ import os
 import dialogflow_api
 import log
 
-load_dotenv()
 logger = log.get_logger('Telegram-bot')
 
 
@@ -27,9 +26,9 @@ def reply(bot, update):
 
     logger.info(f'Message sent to ID {chat_id} - Message: {answer}')
 
-    
-if __name__ == "__main__":
 
+def main():
+    load_dotenv()
     TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
@@ -44,3 +43,7 @@ if __name__ == "__main__":
 
     updater.start_polling()
     updater.idle()
+
+
+if __name__ == "__main__":
+    main()
