@@ -6,7 +6,6 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import random
 import log
 
-load_dotenv()
 logger = log.get_logger('VK-bot')
 
 
@@ -21,8 +20,8 @@ def reply(event, vk_api):
         logger.info(f'Message sent to ID {event.user_id} - Message: {answer}')
 
 
-if __name__ == "__main__":
-
+def main():
+    load_dotenv()
     VK_TOKEN = os.getenv('VK_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
@@ -36,3 +35,8 @@ if __name__ == "__main__":
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             logger.info(f'Received message from ID {event.user_id} - Message: {event.text}')
             reply(event, vk_api)
+
+
+if __name__ == "__main__":
+    main()
+    
