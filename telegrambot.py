@@ -2,10 +2,11 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from dotenv import load_dotenv
 import os
 import dialogflow_api
-import log
+import logging
+import config
 
 
-logger = log.setup_logger('Telegram-bot')
+logger = logging.getLogger('Telegram-bot')
 
 
 def start(bot, update):
@@ -28,11 +29,12 @@ def reply(bot, update):
     logger.info(f'Message sent to ID {chat_id} - Message: {answer}')
 
 
-def main():
+if __name__ == "__main__":
     load_dotenv()
     TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
+    logger = config.setup_logger(logger)
     logger.info('Бот заработал.')
 
     updater = Updater(TELEGRAM_BOT_TOKEN)
@@ -44,7 +46,3 @@ def main():
 
     updater.start_polling()
     updater.idle()
-
-
-if __name__ == "__main__":
-    main()
