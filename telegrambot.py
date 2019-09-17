@@ -34,7 +34,7 @@ if __name__ == "__main__":
     TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
-    logger = config.setup_logger(logger)
+    config.setup_logger(logger)
     logger.info('Бот заработал.')
 
     updater = Updater(TELEGRAM_BOT_TOKEN)
