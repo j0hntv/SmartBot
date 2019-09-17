@@ -15,18 +15,17 @@ class Handler(logging.Handler):
         self.bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
-def setup_logger(name):
+def setup_logger(logger):
 
     telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id_to_send_logs = os.getenv('CHAT_ID_TO_SEND_LOGS')
 
     bot = telegram.Bot(token=telegram_bot_token)
 
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
     handler = Handler(bot, chat_id_to_send_logs)
-    formatter = logging.Formatter(f'[{name}] - %(levelname)s - %(message)s')
+    formatter = logging.Formatter(f'[{logger.name}] - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
 
     return logger
