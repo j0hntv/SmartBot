@@ -4,9 +4,10 @@ import dialogflow_api
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 import random
-import log
+import logging
+import config
 
-logger = log.setup_logger('VK-bot')
+logger = logging.getLogger('VK-bot')
 
 
 def reply(event, vk_api):
@@ -17,14 +18,15 @@ def reply(event, vk_api):
             message=answer,
             random_id=random.randint(1,1000)
         )
-        logger.info(f'Message sent to ID {event.user_id} - Message: {answer}')
+        logger.info(f'Message <{answer}> sent to ID <{event.user_id}>')
 
 
-def main():
+if __name__ == "__main__":
     load_dotenv()
     VK_TOKEN = os.getenv('VK_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
+    logger = config.setup_logger(logger)
     logger.info('Бот заработал.')
 
     vk_session = vk_api.VkApi(token=VK_TOKEN)
@@ -33,10 +35,6 @@ def main():
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            logger.info(f'Received message from ID {event.user_id} - Message: {event.text}')
+            logger.info(f'Message <{event.text}> received from ID <{event.user_id}>')
             reply(event, vk_api)
-
-
-if __name__ == "__main__":
-    main()
     
