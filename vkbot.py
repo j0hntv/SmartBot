@@ -26,7 +26,7 @@ if __name__ == "__main__":
     VK_TOKEN = os.getenv('VK_TOKEN')
     GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
 
-    logger = config.setup_logger(logger)
+    config.setup_logger(logger)
     logger.info('Бот заработал.')
 
     vk_session = vk_api.VkApi(token=VK_TOKEN)
